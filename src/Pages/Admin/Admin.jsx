@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import Sidebar from "../../Components/Sidebar";
+import Sidebar from "../../Components/SideBar/Sidebar";
+import Header from "../../Components/Header/Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faUser, faUsers, faClipboardList, faFileAlt, faUserGraduate, faClipboardCheck, faCreditCard  } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -32,8 +33,9 @@ const widgetData = [
 const Widget = ({ title, value, icon, color }) => (
   <div className={`widget ${color}`}>
     <FontAwesomeIcon icon={icon} className="icon" />
-    <h3>{title}</h3>
     <p>{value}</p>
+    <h3>{title}</h3>
+    <br /> <br />
     <button>
       More Info <FontAwesomeIcon icon={faArrowRight} />
     </button>
@@ -89,30 +91,23 @@ const Admin = () => {
       case "students":
         return (
           <div className="form-container">
-            <button className="close-btn" onClick={() => toggleForm("students")}>
-              X
-            </button>
+            <button className="close-btn" onClick={() => toggleForm("students")}>X</button>
             <h3>Manage Students</h3>
-            <form>
+            <div>
               <label>Search by Name:</label>
               <input type="text" placeholder="Enter student name" />
               <label>Student ID:</label>
               <input type="text" placeholder="Enter student ID" />
-              <button type="submit">Search</button>
-            </form>
+              <button type="submit" className="form-button">Search</button>
+            </div>
           </div>
         );
       case "admissions":
         return (
           <div className="form-container">
-            <button
-              className="close-btn"
-              onClick={() => toggleForm("admissions")}
-            >
-              X
-            </button>
+            <button className="close-btn" onClick={() => toggleForm("admissions")}>X</button>
             <h3>Process Admissions</h3>
-            <form>
+            <div>
               <label>Application ID:</label>
               <input type="text" placeholder="Enter application ID" />
               <label>Status:</label>
@@ -120,42 +115,38 @@ const Admin = () => {
                 <option value="approve">Approve</option>
                 <option value="reject">Reject</option>
               </select>
-              <button type="submit">Submit</button>
-            </form>
+              <button type="submit" className="form-button">Submit</button>
+            </div>
           </div>
         );
       case "fees":
         return (
           <div className="form-container">
-            <button className="close-btn" onClick={() => toggleForm("fees")}>
-              X
-            </button>
+            <button className="close-btn" onClick={() => toggleForm("fees")}>X</button>
             <h3>Track Fee Payments</h3>
-            <form>
+            <div>
               <label>Student ID:</label>
               <input type="text" placeholder="Enter student ID" />
               <label>Amount Paid:</label>
               <input type="number" placeholder="Amount" />
-              <button type="submit">Submit</button>
-            </form>
+              <button type="submit" className="form-button">Submit</button>
+            </div>
           </div>
         );
       case "reports":
         return (
           <div className="form-container">
-            <button className="close-btn" onClick={() => toggleForm("reports")}>
-              X
-            </button>
+            <button className="close-btn" onClick={() => toggleForm("reports")}>X</button>
             <h3>Generate Reports</h3>
-            <form>
+            <div>
               <label>Select Report Type:</label>
               <select>
                 <option value="student">Student Report</option>
                 <option value="admission">Admission Report</option>
                 <option value="fees">Fees Report</option>
               </select>
-              <button type="submit">Generate</button>
-            </form>
+              <button type="submit" className="form-button">Generate</button>
+            </div>
           </div>
         );
       default:
@@ -163,16 +154,15 @@ const Admin = () => {
     }
   };
 
-  return (
+  return (   
     <div className={`admin-dashboard ${isSidebarCollapsed ? "collapsed" : ""}`}>
+      <Header />
       <Sidebar
         role="admin"
         onCollapseToggle={handleCollapseToggle}
         isCollapsed={isSidebarCollapsed}
       />
       <div className="main-content">
-        <h1>Admin Dashboard</h1>
-
         <div className="widgets">
           {widgetData.map((widget, index) => (
             <Widget
@@ -185,7 +175,8 @@ const Admin = () => {
           ))}
         </div>
 
-        <hr />
+        <br />
+        <br />
 
         <div className="dashboard-links">
           <div className="card" onClick={() => toggleForm("students")}>
@@ -209,7 +200,6 @@ const Admin = () => {
         {activeForm && renderForm(activeForm)}
 
         <br />
-        <hr />
         <br />
 
         {/* Charts */}
@@ -225,6 +215,7 @@ const Admin = () => {
               <Bar data={barChartData} />
             </div>
           </div>
+
           <div className="chart-column">
             <div className="chart-heading">
               <span>Staff vs Students</span>
@@ -237,6 +228,10 @@ const Admin = () => {
             </div>
           </div>
         </div>
+
+
+        <br /> <br />
+
       </div>
     </div>
   );

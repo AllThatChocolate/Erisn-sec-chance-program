@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import "./style.css"; // Add your CSS styles here
 import { FaHome, FaUser, FaBook, FaMoneyBill, FaBell, FaHandshake, FaArchive } from "react-icons/fa";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserGraduate } from '@fortawesome/free-solid-svg-icons';
+import "./style.css"; // Import updated CSS
 
 const Sidebar = ({ role }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -47,7 +47,6 @@ const Sidebar = ({ role }) => {
         {/* Logo and Company Name */}
         <div className="logo">
           <FontAwesomeIcon icon={faUserGraduate} size="2x" />
-          {!isCollapsed && <h2 className="company-name">Company Name</h2>}
         </div>
         {/* Sidebar Collapse Button */}
         <button className="toggle-btn" onClick={toggleSidebar}>
