@@ -1,0 +1,92 @@
+/* Sidebar Styles */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #2c3e50;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: width 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sidebar.collapsed {
+    width: 80px; /* Collapsed sidebar width */
+  }
+  
+  /* Sidebar Header */
+  .sidebar-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .company-name {
+    margin-left: 10px;
+    font-size: 20px;
+    color: #ecf0f1;
+  }
+  
+  .toggle-btn {
+    background: none;
+    color: white;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .toggle-btn:hover {
+    background-color: #2980b9;
+    border-radius: 5px;
+  }
+  
+  /* Sidebar Links */
+  .sidebar-links {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  
+  .sidebar-links li {
+    margin: 15px 0;
+  }
+  
+  .sidebar-links a {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .sidebar-links a:hover {
+    background-color: #2980b9;
+    border-radius: 5px;
+  }
+  
+  .sidebar-links .fa {
+    margin-right: 10px;
+  }
+  
+  /* Main Content Area */
+  .main-content {
+    margin-left: 250px; /* Default sidebar width */
+    transition: margin-left 0.3s ease;
+  }
+  
+  .sidebar.collapsed + .main-content {
+    margin-left: 80px; /* Adjust for collapsed sidebar */
+  }
+  

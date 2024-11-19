@@ -1,19 +1,15 @@
 import React, { useState } from "react";
-import {
-  FaHome,
-  FaUser,
-  FaBook,
-  FaMoneyBill,
-  FaBell,
-  FaHandshake,
-  FaArchive,
-} from "react-icons/fa";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import "./style.css"; // Add your CSS styles here
+import { FaHome, FaUser, FaBook, FaMoneyBill, FaBell, FaHandshake, FaArchive } from "react-icons/fa";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserGraduate } from '@fortawesome/free-solid-svg-icons';
 
 const Sidebar = ({ role }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
+  // Sidebar links based on role
   const links = {
     admin: [
       { name: "Dashboard", path: "/admin", icon: <FaHome /> },
@@ -23,21 +19,13 @@ const Sidebar = ({ role }) => {
       { name: "Fees", path: "/admin/fees", icon: <FaMoneyBill /> },
       { name: "Behavior Tracking", path: "/admin/behavior", icon: <FaBell /> },
       { name: "Library", path: "/admin/library", icon: <FaBook /> },
-      {
-        name: "Sponsorship",
-        path: "/admin/sponsorship",
-        icon: <FaHandshake />,
-      },
+      { name: "Sponsorship", path: "/admin/sponsorship", icon: <FaHandshake /> },
       { name: "Alumni", path: "/admin/alumni", icon: <FaUser /> },
     ],
     teacher: [
       { name: "Dashboard", path: "/teacher", icon: <FaHome /> },
       { name: "Students", path: "/teacher/students", icon: <FaUser /> },
-      {
-        name: "Behavior Tracking",
-        path: "/teacher/behavior",
-        icon: <FaBell />,
-      },
+      { name: "Behavior Tracking", path: "/teacher/behavior", icon: <FaBell /> },
       { name: "Library", path: "/teacher/library", icon: <FaBook /> },
     ],
     student: [
@@ -47,20 +35,27 @@ const Sidebar = ({ role }) => {
       { name: "Library", path: "/student/library", icon: <FaBook /> },
     ],
   };
+
+  // Toggle the sidebar collapse state
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
   };
 
   return (
     <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
-      {/* <button className="toggle-btn" onClick={toggleSidebar}>
-        {isCollapsed ? "➤" : "◀"}
-      </button>
-      <h2 className="sidebar-title">
-        {isCollapsed
-          ? "Menu"
-          : `${role.charAt(0).toUpperCase() + role.slice(1)} Dashboard`}
-      </h2> */}
+      <div className="sidebar-header">
+        {/* Logo and Company Name */}
+        <div className="logo">
+          <FontAwesomeIcon icon={faUserGraduate} size="2x" />
+          {!isCollapsed && <h2 className="company-name">Company Name</h2>}
+        </div>
+        {/* Sidebar Collapse Button */}
+        <button className="toggle-btn" onClick={toggleSidebar}>
+          {isCollapsed ? "➤" : "◀"}
+        </button>
+      </div>
+
+      {/* Sidebar Links */}
       <ul className="sidebar-links">
         {links[role].map((link, index) => (
           <li key={index}>
@@ -76,7 +71,7 @@ const Sidebar = ({ role }) => {
 };
 
 Sidebar.propTypes = {
-  role: PropTypes.oneOf(["admin", "teacher", "student"]),
+  role: PropTypes.oneOf(["admin", "teacher", "student"]).isRequired,
 };
 
 export default Sidebar;
